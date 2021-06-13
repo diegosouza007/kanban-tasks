@@ -1,0 +1,19 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+}
+
+section {
+    width: 30%;
+    margin: auto;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
