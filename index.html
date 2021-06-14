@@ -10,11 +10,32 @@
 </head>
 
 <body>
+
+    <h1>Kanban</h1>
+
     <div id="container">
-        <section>To Do</section>
-        <section>Doing</section>
-        <section>Done</section>
+        <section>
+            <h3>To Do</h3>
+            <input class="inputText" type="text"><button id="addButton">+</button>
+            <u id="todoList"></u>
+        </section>
+        <section>
+            <h3>Doing</h3>
+            <input class="inputText" type="text">
+            <u></u>
+        </section>
+        <section>
+            <h3>Done</h3>
+            <input class="inputText" type="text">
+            <u></u>
+        </section>
     </div>
+    <div id="statusBox">
+        <p>You have <span id="countTasks">0</span> tasks in your list.</p>
+        <button id="clearButton">Clear</button>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
