@@ -17,7 +17,7 @@ function addNewTask() {
     listArray = listTodo;
     listArray.innerHTML += "<li>Teste</li>";
     tasks++;
-    countTasks.innerHTML = `<span style="color:red"> ${tasks} </span>`;
+    countTasks.innerHTML = `<span style="color:#f94144"> ${tasks} </span>`;
 }
 
 function clearTasks() {
