@@ -1,12 +1,22 @@
-// Get of the page elements reference to manipulate later
+// Getting all input text references to manipulate later
 
-const inputText = document.getElementById('inputText');
+const inputTextTodo = document.getElementById('todoInput');
+const inputTextDoing = document.getElementById('doingInput');
+const inputTextDone = document.getElementById('doneInput');
+
+// Getting the button references 
+
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
-const listTodo = document.getElementById('todoList');
+
+// Reference to  unordered list (ul)
+
+const todoLi = document.getElementById('todoList');
+
+// Reference to <span> element to show the number of tasks created 
+
 let countTasks = document.getElementById('countTasks');
 
-let listArray = [];
 let tasks = 0;
 
 addButton.addEventListener('click', addNewTask);
@@ -14,26 +24,32 @@ clearButton.addEventListener('click', clearTasks);
 
 function addNewTask() {
 
-    listArray = listTodo;
-    listArray.innerHTML += "<li>Teste</li>";
-    tasks++;
-    countTasks.innerHTML = `<span style="color:#f94144"> ${tasks} </span>`;
+    if (inputTextTodo.value == '') {
+        alert("Insert at least two or more words.");
+    } else {
+
+        todoLi.innerHTML += `<li>${inputTextTodo.value}</li>`;
+        tasks++;
+        countTasks.innerHTML = `<span style="color:#f94144"> ${tasks} </span>`;
+        inputTextTodo.value = '';
+
+    }
 }
 
 function clearTasks() {
 
-    let opt = false;
+    let option = false;
 
     if (tasks != 0) {
-        opt = confirm("You have one or more tasks created.\n Are you sure you want to continue?");
+        option = confirm("You have one or more tasks created.\n Are you sure you want to continue?");
     } else {
-        alert("You don't have any task created.");
+        alert("You don't have any task created yet.");
     }
 
-    if (opt != false) {
+    if (option != false) {
         tasks = 0;
         countTasks.innerHTML = 0;
-        listArray.innerHTML = '';
+        todoLi.innerHTML = '';
     }
 
 }

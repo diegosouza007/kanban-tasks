@@ -15,6 +15,7 @@ li {
     list-style: none;
     background-color: white;
     margin: 5px 20px;
+    padding: 7px;
 }
 
 h1 {
@@ -60,7 +61,7 @@ section:nth-child(3) {
     background: #06d6a0;
 }
 
-.inputText {
+.box-container {
     text-align: center;
     box-sizing: border-box;
     height: 30px;
@@ -69,6 +70,7 @@ section:nth-child(3) {
     appearance: none;
     border: none;
     margin: 5px;
+    font-style: italic;
 }
 
 #addButton {
@@ -77,6 +79,16 @@ section:nth-child(3) {
     background: #272727;
     color: white;
     border: none;
+    width: 32px;
+}
+
+#addButton:hover {
+    background: #353535;
+}
+
+#addButton:active {
+    background: #FFFFFF;
+    color: #1A1A1D;
 }
 
 #statusBox {
