@@ -77,7 +77,7 @@ span {
     font-style: italic;
 }
 
-#addButton {
+.addButton {
     font-weight: bold;
     font-size: 1.5rem;
     background: #272727;
@@ -86,16 +86,17 @@ span {
     width: 32px;
 }
 
-#addButton:hover {
+.addButton:hover {
     background: #353535;
 }
 
-#addButton:active {
+.addButton:active {
     background: #FFFFFF;
     color: #1A1A1D;
 }
 
 #statusBox {
+    margin-top: 5px;
     display: flex;
     justify-content: center;
 }
@@ -113,7 +114,6 @@ span {
     justify-content: center;
     align-content: center;
     align-items: center;
-    /* box-shadow: 2px 2px 4px 0px; */
 }
 
 #clearButton:hover {
