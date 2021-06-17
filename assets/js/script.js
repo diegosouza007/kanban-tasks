@@ -1,31 +1,33 @@
-// Getting all input text references to manipulate later
-
 const inputTextTodo = document.getElementById('todoInput');
-const inputTextDoing = document.getElementById('doingInput');
-const inputTextDone = document.getElementById('doneInput');
-
-// Getting the button references 
 
 const addButton = document.getElementById('addButton');
 const clearButton = document.getElementById('clearButton');
 
-// Reference to  unordered list (ul)
-
 const todoLi = document.getElementById('todoList');
-
-// Reference to <span> element to show the number of tasks created 
 
 let countTasks = document.getElementById('countTasks');
 
 let tasks = 0;
 
+// Capture action when the user clicks in some button on the page
+
 addButton.addEventListener('click', addNewTask);
 clearButton.addEventListener('click', clearTasks);
+
+// This code part permits the user to press the Enter key in your keyboard instead of mouse click in add button for add task too
+
+inputTextTodo.addEventListener('keydown', function(e) {
+    if (e.key == "Enter") {
+        addNewTask();
+    }
+});
+
+// Function to create the tasks
 
 function addNewTask() {
 
     if (inputTextTodo.value == '') {
-        alert("Insert at least two or more words.");
+        alert("Insert at least one or more words.");
     } else {
 
         todoLi.innerHTML += `<li>${inputTextTodo.value}</li>`;
@@ -36,12 +38,14 @@ function addNewTask() {
     }
 }
 
+// Function to remove all tasks created by the user
+
 function clearTasks() {
 
     let option = false;
 
     if (tasks != 0) {
-        option = confirm("You have one or more tasks created.\n Are you sure you want to continue?");
+        option = confirm("You have one or more tasks created.\n\n Are you sure you want to continue?");
     } else {
         alert("You don't have any task created yet.");
     }

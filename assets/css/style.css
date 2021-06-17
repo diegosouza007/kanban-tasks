@@ -3,7 +3,7 @@ html {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #272727;
+    background-color: #360568;
     color: white;
     min-width: 350px;
     text-decoration: none;
@@ -20,22 +20,6 @@ li {
 
 h1 {
     text-align: center;
-}
-
-#container {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-#container div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
 }
 
 section {
@@ -59,6 +43,26 @@ section:nth-child(2) {
 
 section:nth-child(3) {
     background: #06d6a0;
+}
+
+span {
+    font-weight: bold;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .box-container {
@@ -98,4 +102,30 @@ section:nth-child(3) {
 
 #statusBox p {
     margin: 10px;
+}
+
+#clearButton {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    /* box-shadow: 2px 2px 4px 0px; */
+}
+
+#clearButton:hover {
+    background-color: #f94144;
+}
+
+#clearButton:active {
+    background-color: white;
+}
+
+#clearButton img {
+    width: 28px;
+    height: 28px;
+    width: 100%;
 }
