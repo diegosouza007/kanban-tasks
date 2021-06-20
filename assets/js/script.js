@@ -140,5 +140,7 @@ function updateTasksList() {
             }
         }
     }
-    countTasks.innerHTML = `<span style="color:#f94144"> ${persistence.length} </span>`;
+    if (persistence != null) {
+        countTasks.innerHTML = `<span style="color:#f94144"> ${persistence.length} </span>`;
+    }
 }
