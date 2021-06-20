@@ -19,9 +19,16 @@ liTasks[1] = document.getElementById('doingList');
 liTasks[2] = document.getElementById('doneList');
 
 let countTasks = document.getElementById('countTasks');
-let tasks = 0;
 
-// Capture action when the user clicks in some button on the page
+// Array to receive and manage all tasks created
+
+let tasks = [];
+
+// Check if there is data in the localStorage and if it exists rebuilds the list
+
+updateTasksList();
+
+// Capture action when the user clicks with mouse button in plus button on the page
 
 addButton[0].addEventListener('click', addNewTask);
 addButton[1].addEventListener('click', addNewTask);
@@ -49,22 +56,42 @@ inputText[2].addEventListener('keydown', function(e) {
     }
 });
 
-// Function to create the tasks
+// Create a new task when the user add
 
 function addNewTask() {
-
     for (let i in inputText) {
-
         if (inputText[i].value != '') {
 
-            liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-            tasks++;
-            countTasks.innerHTML = `<span style="color:#f94144"> ${tasks} </span>`;
-            inputText[i].value = '';
-
+            if (i == 0) {
+                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
+                let task = createNewTask(inputText[i].value, "todolist")
+                tasks.push(task);
+                inputText[i].value = '';
+            } else if (i == 1) {
+                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
+                let task = createNewTask(inputText[i].value, "doinglist")
+                tasks.push(task);
+                inputText[i].value = '';
+            } else {
+                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
+                let task = createNewTask(inputText[i].value, "donelist")
+                tasks.push(task);
+                inputText[i].value = '';
+            }
         } else {
             continue;
         }
+    }
+    countTasks.innerHTML = `<span style="color:#f94144"> ${tasks.length} </span>`;
+    localStorage.setItem("Tasks", JSON.stringify(tasks));
+}
+
+// Object constructor of the list elements
+
+function createNewTask(content, tag) {
+    return {
+        content: content,
+        tag: tag
     }
 }
 
@@ -75,7 +102,7 @@ function clearTasks() {
     let option = false;
 
     if (tasks != 0) {
-        option = confirm("You have one or more tasks created.\n\n Are you sure you want to continue?");
+        option = confirm("You have one or more tasks created.\n\nAre you sure you want to continue?");
     } else {
         alert("You don't have any task created yet.");
     }
@@ -89,6 +116,29 @@ function clearTasks() {
         liTasks[1].innerHTML = '';
         liTasks[2].innerHTML = '';
 
-    }
+        localStorage.clear();
 
+    }
+}
+
+function updateTasksList() {
+
+    let l = localStorage.getItem("Tasks");
+    let persistence = JSON.parse(l);
+
+    if (persistence != null) {
+        for (let x in persistence) {
+            if (persistence[x].tag == "todolist") {
+                liTasks[0].innerHTML += `<li>${persistence[x].content}</li>`;
+                tasks.push(persistence[x]);
+            } else if (persistence[x].tag == "doinglist") {
+                liTasks[1].innerHTML += `<li>${persistence[x].content}</li>`;
+                tasks.push(persistence[x]);
+            } else {
+                liTasks[2].innerHTML += `<li>${persistence[x].content}</li>`;
+                tasks.push(persistence[x]);
+            }
+        }
+    }
+    countTasks.innerHTML = `<span style="color:#f94144"> ${persistence.length} </span>`;
 }
