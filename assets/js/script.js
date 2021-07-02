@@ -90,6 +90,7 @@ function addNewTask() {
 
 function createNewTask(content, tag) {
     return {
+        id: generateId(),
         content: content,
         tag: tag
     }
@@ -121,6 +122,8 @@ function clearTasks() {
     }
 }
 
+// Function to check if exists data in localstorage and rebuild the tasks list
+
 function updateTasksList() {
 
     let l = localStorage.getItem("Tasks");
@@ -143,4 +146,18 @@ function updateTasksList() {
     if (persistence != null) {
         countTasks.innerHTML = `<span style="color:#f94144"> ${persistence.length} </span>`;
     }
+}
+
+// Generate a random ID to identify each task
+
+function generateId() {
+    
+    let id = "";
+
+    for (let x = 0; x < 6; x++) {
+        id += Math.floor(Math.random()* 10);
+    }
+
+    return id;
+
 }
