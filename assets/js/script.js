@@ -63,13 +63,13 @@ function addNewTask() {
         if (inputText[i].value != '') {
 
             if (i == 0) {
-                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-                let task = createNewTask(inputText[i].value, "todolist")
+                liTasks[i].innerHTML += `<li>${inputText[i].value}<span class="remove-btn">X</span></li>`;
+                let task = createNewTask(inputText[i].value, "todolist");
                 tasks.push(task);
                 inputText[i].value = '';
             } else if (i == 1) {
                 liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-                let task = createNewTask(inputText[i].value, "doinglist")
+                let task = createNewTask(inputText[i].value, "doinglist");
                 tasks.push(task);
                 inputText[i].value = '';
             } else {
@@ -132,7 +132,7 @@ function updateTasksList() {
     if (persistence != null) {
         for (let x in persistence) {
             if (persistence[x].tag == "todolist") {
-                liTasks[0].innerHTML += `<li>${persistence[x].content}</li>`;
+                liTasks[0].innerHTML += `<li class="removeButton">${persistence[x].content}<span class="remove-btn">X</span></li>`;
                 tasks.push(persistence[x]);
             } else if (persistence[x].tag == "doinglist") {
                 liTasks[1].innerHTML += `<li>${persistence[x].content}</li>`;
@@ -151,11 +151,11 @@ function updateTasksList() {
 // Generate a random ID to identify each task
 
 function generateId() {
-    
+
     let id = "";
 
     for (let x = 0; x < 6; x++) {
-        id += Math.floor(Math.random()* 10);
+        id += Math.floor(Math.random() * 10);
     }
 
     return id;
