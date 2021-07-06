@@ -63,7 +63,7 @@ function addNewTask() {
         if (inputText[i].value != '') {
 
             if (i == 0) {
-                liTasks[i].innerHTML += `<li>${inputText[i].value}<span class="remove-btn">X</span></li>`;
+                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
                 let task = createNewTask(inputText[i].value, "todolist");
                 tasks.push(task);
                 inputText[i].value = '';
@@ -132,7 +132,7 @@ function updateTasksList() {
     if (persistence != null) {
         for (let x in persistence) {
             if (persistence[x].tag == "todolist") {
-                liTasks[0].innerHTML += `<li class="removeButton">${persistence[x].content}<span class="remove-btn">X</span></li>`;
+                liTasks[0].innerHTML += `<li>${persistence[x].content}</li>`;
                 tasks.push(persistence[x]);
             } else if (persistence[x].tag == "doinglist") {
                 liTasks[1].innerHTML += `<li>${persistence[x].content}</li>`;
