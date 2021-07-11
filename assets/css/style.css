@@ -25,6 +25,7 @@ li {
     background-color: white;
     margin: 5px 20px;
     padding: 7px 20px;
+    transition: .2s;
 }
 
 h1 {

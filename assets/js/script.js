@@ -24,7 +24,7 @@ let countTasks = document.getElementById('countTasks');
 
 let tasks = [];
 
-// Check if there is data in the localStorage and if it exists rebuilds the list
+// Check if there are data in the localStorage and if it exists rebuilds the list
 
 updateTasksList();
 
@@ -56,28 +56,43 @@ inputText[2].addEventListener('keydown', function(e) {
     }
 });
 
+// Return the ID from the last task add
+
+function getLastElementId() {
+
+    const lastIndex = tasks.length - 1;
+    const lastArrayElement = tasks.filter((content, index) => index == lastIndex);
+    const idNumber = lastArrayElement[0].id;
+    return idNumber;
+}
+
 // Create a new task when the user add
 
 function addNewTask() {
-    for (let i in inputText) {
-        if (inputText[i].value != '') {
+    for (let field in inputText) {
+        if (inputText[field].value != '') {
 
-            if (i == 0) {
-                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-                let task = createNewTask(inputText[i].value, "todolist");
+            if (field == 0) {
+                let task = createNewTask(inputText[field].value, "todolist");
                 tasks.push(task);
-                inputText[i].value = '';
-            } else if (i == 1) {
-                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-                let task = createNewTask(inputText[i].value, "doinglist");
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+
+                inputText[field].value = '';
+
+            } else if (field == 1) {
+                let task = createNewTask(inputText[field].value, "doinglist");
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
-                inputText[i].value = '';
+
+                inputText[field].value = '';
             } else {
-                liTasks[i].innerHTML += `<li>${inputText[i].value}</li>`;
-                let task = createNewTask(inputText[i].value, "donelist")
+                let task = createNewTask(inputText[field].value, "donelist");
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
-                inputText[i].value = '';
+
+                inputText[field].value = '';
             }
+
         } else {
             continue;
         }
@@ -96,6 +111,31 @@ function createNewTask(content, tag) {
     }
 }
 
+// Fuction to delete the specific task choosen by the user
+
+function deleteTask(task) {
+
+
+    let storage = localStorage.getItem("Tasks");
+    let tasks = JSON.parse(storage);
+
+    tasks = tasks.filter(value => value.id != task.getAttribute('id'));
+    localStorage.setItem("Tasks", JSON.stringify(tasks));
+
+
+    tasks = null;
+
+
+
+    countTasks.innerHTML = 0;
+    liTasks[0].innerHTML = '';
+    liTasks[1].innerHTML = '';
+    liTasks[2].innerHTML = '';
+
+    updateTasksList();
+
+}
+
 // Function to remove all tasks created by the user
 
 function clearTasks() {
@@ -108,7 +148,7 @@ function clearTasks() {
         alert("You don't have any task created yet.");
     }
 
-    if (option != false) {
+    if (option) {
 
         tasks = 0;
         countTasks.innerHTML = 0;
@@ -126,25 +166,25 @@ function clearTasks() {
 
 function updateTasksList() {
 
-    let l = localStorage.getItem("Tasks");
-    let persistence = JSON.parse(l);
+    let storage = localStorage.getItem("Tasks");
+    let tasks = JSON.parse(storage);
 
-    if (persistence != null) {
-        for (let x in persistence) {
-            if (persistence[x].tag == "todolist") {
-                liTasks[0].innerHTML += `<li>${persistence[x].content}</li>`;
-                tasks.push(persistence[x]);
-            } else if (persistence[x].tag == "doinglist") {
-                liTasks[1].innerHTML += `<li>${persistence[x].content}</li>`;
-                tasks.push(persistence[x]);
+    if (tasks != null) {
+        for (let task in tasks) {
+            if (tasks[task].tag == "todolist") {
+                liTasks[0].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                tasks.push(tasks[task]);
+            } else if (tasks[task].tag == "doinglist") {
+                liTasks[1].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                tasks.push(tasks[task]);
             } else {
-                liTasks[2].innerHTML += `<li>${persistence[x].content}</li>`;
-                tasks.push(persistence[x]);
+                liTasks[2].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                tasks.push(tasks[task]);
             }
         }
     }
-    if (persistence != null) {
-        countTasks.innerHTML = `<span style="color:#f94144"> ${persistence.length} </span>`;
+    if (tasks != null) {
+        countTasks.innerHTML = `<span style="color:#f94144"> ${tasks.length} </span>`;
     }
 }
 
