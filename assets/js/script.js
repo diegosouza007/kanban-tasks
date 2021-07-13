@@ -75,19 +75,19 @@ function addNewTask() {
             if (field == 0) {
                 let task = createNewTask(inputText[field].value, "todolist");
                 tasks.push(task);
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
 
                 inputText[field].value = '';
 
             } else if (field == 1) {
                 let task = createNewTask(inputText[field].value, "doinglist");
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
 
                 inputText[field].value = '';
             } else {
                 let task = createNewTask(inputText[field].value, "donelist");
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}" onclick="deleteTask(this)">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
 
                 inputText[field].value = '';
@@ -115,6 +115,7 @@ function createNewTask(content, tag) {
 
 function deleteTask(task) {
 
+    console.log(task);
 
     let storage = localStorage.getItem("Tasks");
     let tasks = JSON.parse(storage);
@@ -172,13 +173,13 @@ function updateTasksList() {
     if (tasks != null) {
         for (let task in tasks) {
             if (tasks[task].tag == "todolist") {
-                liTasks[0].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[0].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(tasks[task]);
             } else if (tasks[task].tag == "doinglist") {
-                liTasks[1].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[1].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(tasks[task]);
             } else {
-                liTasks[2].innerHTML += `<li id="${tasks[task].id}" onclick="deleteTask(this)">${tasks[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[2].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(tasks[task]);
             }
         }
