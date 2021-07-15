@@ -75,8 +75,6 @@ function addNewTask() {
                 tasks.push(task);
                 liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 inputText[field].value = '';
-                console.log(liTasks[field]);
-                console.log(inputText[field]);
             } else if (field == 1) {
                 let task = createNewTask(inputText[field].value, "doinglist");
                 liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
@@ -94,6 +92,7 @@ function addNewTask() {
     }
     countTasks.innerHTML = `<span style="color:#f94144"> ${tasks.length} </span>`;
     localStorage.setItem("Tasks", JSON.stringify(tasks));
+    window.location.reload();
 }
 
 // Object constructor of the list elements
@@ -157,6 +156,7 @@ function clearTasks() {
         localStorage.clear();
 
     }
+    window.location.reload();
 }
 
 // Function to get data in localstorage and rebuild the tasks list
@@ -200,11 +200,9 @@ function generateId() {
     for (let x = 0; x < 6; x++) {
         id += Math.floor(Math.random() * 10);
     }
-
     return id;
-
 }
 
-// Rebuild the variable deltask with the delete-task class tag reference
+// Rebuild the variable deltask with the "delete-task" class tag reference
 
 deleteTasks();

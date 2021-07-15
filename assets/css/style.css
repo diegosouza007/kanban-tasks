@@ -124,6 +124,7 @@ span {
     justify-content: center;
     align-content: center;
     align-items: center;
+    margin-bottom: 1.2rem;
 }
 
 #clearButton:hover {
