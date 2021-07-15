@@ -1,4 +1,4 @@
-let addButton = [];
+const addButton = [];
 
 addButton[0] = document.getElementsByClassName("addButton")[0];
 addButton[1] = document.getElementsByClassName("addButton")[1];
@@ -6,19 +6,19 @@ addButton[2] = document.getElementsByClassName("addButton")[2];
 
 const clearButton = document.getElementById('clearButton');
 
-let inputText = [];
+const inputText = [];
 
 inputText[0] = document.getElementById('todoInput');
 inputText[1] = document.getElementById('doingInput');
 inputText[2] = document.getElementById('doneInput');
 
-let liTasks = []
+const liTasks = []
 
 liTasks[0] = document.getElementById('todoList');
 liTasks[1] = document.getElementById('doingList');
 liTasks[2] = document.getElementById('doneList');
 
-let countTasks = document.getElementById('countTasks');
+const countTasks = document.getElementById('countTasks');
 
 // Array to receive and manage all tasks created
 
@@ -36,7 +36,7 @@ addButton[2].addEventListener('click', addNewTask);
 
 clearButton.addEventListener('click', clearTasks);
 
-// This code part permits the user to press the Enter key in your keyboard instead of mouse click in add button for add task too
+// This code part permits the user to press the Enter key in your keyboard instead of mouse click in add button for add a task too
 
 inputText[0].addEventListener('keydown', function(e) {
     if (e.key == "Enter") {
@@ -56,10 +56,9 @@ inputText[2].addEventListener('keydown', function(e) {
     }
 });
 
-// Return the ID from the last task add
+// Return the ID from the last task added
 
 function getLastElementId() {
-
     const lastIndex = tasks.length - 1;
     const lastArrayElement = tasks.filter((content, index) => index == lastIndex);
     const idNumber = lastArrayElement[0].id;
@@ -71,28 +70,24 @@ function getLastElementId() {
 function addNewTask() {
     for (let field in inputText) {
         if (inputText[field].value != '') {
-
             if (field == 0) {
                 let task = createNewTask(inputText[field].value, "todolist");
                 tasks.push(task);
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
-
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 inputText[field].value = '';
-
+                console.log(liTasks[field]);
+                console.log(inputText[field]);
             } else if (field == 1) {
                 let task = createNewTask(inputText[field].value, "doinglist");
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
-
                 inputText[field].value = '';
             } else {
                 let task = createNewTask(inputText[field].value, "donelist");
-                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+                liTasks[field].innerHTML += `<li id="${getLastElementId()}">${inputText[field].value}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
                 tasks.push(task);
-
                 inputText[field].value = '';
             }
-
         } else {
             continue;
         }
@@ -111,29 +106,30 @@ function createNewTask(content, tag) {
     }
 }
 
-// Fuction to delete the specific task choosen by the user
+// Operations to delete the specific task choosen by the user
 
-function deleteTask(task) {
+function deleteTasks() {
 
-    console.log(task);
+    // Create an Node List with all trash buttons from tasks created
 
-    let storage = localStorage.getItem("Tasks");
-    let tasks = JSON.parse(storage);
+    let deltask = document.querySelectorAll('.delete-task');
 
-    tasks = tasks.filter(value => value.id != task.getAttribute('id'));
-    localStorage.setItem("Tasks", JSON.stringify(tasks));
+    // loop to capture an action when the user click in some specific task delete button
 
+    for (let i = 0; i < deltask.length; i++) {
+        deltask[i].addEventListener('click', function() {
 
-    tasks = null;
+            let id = deltask[i].parentElement.id;
+            let storage = localStorage.getItem("Tasks");
+            let taskslist = JSON.parse(storage);
 
+            tasks = taskslist.filter(value => value.id != id);
+            localStorage.setItem("Tasks", JSON.stringify(tasks));
 
-
-    countTasks.innerHTML = 0;
-    liTasks[0].innerHTML = '';
-    liTasks[1].innerHTML = '';
-    liTasks[2].innerHTML = '';
-
-    updateTasksList();
+            updateTasksList();
+            window.location.reload();
+        });
+    }
 
 }
 
@@ -163,30 +159,36 @@ function clearTasks() {
     }
 }
 
-// Function to check if exists data in localstorage and rebuild the tasks list
+// Function to get data in localstorage and rebuild the tasks list
 
 function updateTasksList() {
 
     let storage = localStorage.getItem("Tasks");
-    let tasks = JSON.parse(storage);
+    let taskslist = JSON.parse(storage);
+    let todolist = doinglist = donelist = "";
+    tasks = [];
 
-    if (tasks != null) {
-        for (let task in tasks) {
-            if (tasks[task].tag == "todolist") {
-                liTasks[0].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
-                tasks.push(tasks[task]);
-            } else if (tasks[task].tag == "doinglist") {
-                liTasks[1].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
-                tasks.push(tasks[task]);
-            } else {
-                liTasks[2].innerHTML += `<li id="${tasks[task].id}">${tasks[task].content}<img onclick="deleteTask(this)" class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
-                tasks.push(tasks[task]);
-            }
+    for (let task in taskslist) {
+        if (taskslist[task].tag == "todolist") {
+            todolist += `<li id="${taskslist[task].id}">${taskslist[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+            tasks.push(taskslist[task]);
+        } else if (taskslist[task].tag == "doinglist") {
+            doinglist += `<li id="${taskslist[task].id}">${taskslist[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+            tasks.push(taskslist[task]);
+        } else {
+            donelist += `<li id="${taskslist[task].id}">${taskslist[task].content}<img class="delete-task" src="./assets/img/trash-1.svg"/></li>`;
+            tasks.push(taskslist[task]);
         }
     }
-    if (tasks != null) {
+
+    liTasks[0].innerHTML = todolist;
+    liTasks[1].innerHTML = doinglist;
+    liTasks[2].innerHTML = donelist;
+
+    if (tasks != null && tasks != "") {
         countTasks.innerHTML = `<span style="color:#f94144"> ${tasks.length} </span>`;
     }
+
 }
 
 // Generate a random ID to identify each task
@@ -202,3 +204,7 @@ function generateId() {
     return id;
 
 }
+
+// Rebuild the variable deltask with the delete-task class tag reference
+
+deleteTasks();
