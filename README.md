@@ -1,4 +1,13 @@
-# To-Do-list
+# Kanban Tasks
+
+<p align="center">
+  <img src="https://img.shields.io/badge/made%20by-DIEGO%20SOUZA-742FD2?style=flat-square">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/diegosouza007/kanban-tasks?color=742FD2&style=flat-square">
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/diegosouza007/kanban-tasks?color=742FD2&style=flat-square">
+  <a href="https://opensource.org/licenses/MIT">
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-742FD2?style=flat-square">
+  </a>
+</p>
 
 This project was developed to offer to users a interface to create and manager yours tasks using the Kaban methodology.
 
