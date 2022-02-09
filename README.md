@@ -27,4 +27,4 @@ Work items are visualized to give participants a view of progress and process, f
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/11907759/125862772-a09705d0-7f03-4e2a-8da1-c4b4dd77f96b.gif)
 
-Live demo: <a href="https://diegosouza007.github.io/To-Do-list/">https://diegosouza007.github.io/To-Do-list/</a>
+Live demo: <a href="https://diegosouza007.github.io/kanban-tasks/">https://diegosouza007.github.io/kanban-tasks/</a>
